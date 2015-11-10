@@ -1,25 +1,26 @@
-
-create table delivery(
-	id_delivery varchar(10),
-	nama_delivery varchar(20),
-	jenis_delivery varchar(20),
-	alamat_delivery varchar(30),
-	keterangan varchar(50)
+CREATE TABLE delivery(
+	id_delivery VARCHAR(10),
+	nama_delivery VARCHAR(20),
+	jenis_delivery VARCHAR(20),
+	alamat_delivery VARCHAR(30),
+	keterangan VARCHAR(50)
 );
 
-alter table delivery add constraint pk_delivery primary key (id_delivery);
+ALTER TABLE delivery ADD CONSTRAINT pk_delivery PRIMARY KEY(id_delivery);
 
-create table menu(
-	id_menu varchar(10),
-	nama_menu varchar(20),
-	harga int,
-	id_delivery varchar(10)
+CREATE TABLE menu(
+	id_menu VARCHAR(10),
+	nama_menu VARCHAR(20),
+	harga INT,
+	id_delivery VARCHAR(10)
 );
 
-alter table menu add constraint pk_menu primary key (id_menu);
+ALTER TABLE menu ADD CONSTRAINT pk_menu PRIMARY KEY(id_menu);
 
-alter table menu add constraint fk_menu FOREIGN key(id_delivery) references
-delivery (id_delivery) on delete cascade on update cascade;
+ALTER TABLE menu ADD CONSTRAINT fk_menu
+	FOREIGN KEY(id_delivery)
+	REFERENCES delivery (id_delivery)
+	ON DELETE CASCADE ON UPDATE CASCADE;
 
 create table pembeli(
 	id_pembeli varchar(10),
