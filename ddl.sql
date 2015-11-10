@@ -22,31 +22,33 @@ ALTER TABLE menu ADD CONSTRAINT fk_menu
 	REFERENCES delivery (id_delivery)
 	ON DELETE CASCADE ON UPDATE CASCADE;
 
-create table pembeli(
-	id_pembeli varchar(10),
-	nama_pembeli varchar(20),
-	no_hp varchar(13),
-	id_line varchar(20)
+CREATE TABLE pembeli(
+	id_pembeli VARCHAR(10),
+	nama_pembeli VARCHAR(20),
+	no_hp VARCHAR(13),
+	id_line VARCHAR(20)
 );
 
-alter table pembeli add constraint pk_pembeli primary key (id_pembeli);
+ALTER TABLE pembeli ADD CONSTRAINT pk_pembeli PRIMARY KEY(id_pembeli);
 
-create table membeli(
-	id_pembeli varchar(10),
-	waktu_beli timestamp,
-	id_menu varchar(10),
-	jumlah int,
-	total_bayar int
+CREATE TABLE membeli(
+	id_pembeli VARCHAR(10),
+	waktu_beli TIMESTAMP,
+	id_menu VARCHAR(10),
+	jumlah INT,
+	total_bayar INT
 );
 
-alter table membeli add constraint fk_waktu foreign key (id_menu) references
-menu (id_menu) on delete restrict on update cascade;
+ALTER TABLE membeli ADD CONSTRAINT fk_waktu
+	FOREIGN KEY(id_menu)
+	REFERENCES menu(id_menu)
+	ON UPDATE CASCADE ON DELETE RESTRICT;
 
-alter table membeli add constraint fk_waktu2 foreign key (id_pembeli) references
-pembeli (id_pembeli) on delete restrict on update cascade;
+ALTER TABLE membeli ADD CONSTRAINT fk_waktu2
+	FOREIGN KEY(id_pembeli)
+	REFERENCES pembeli(id_pembeli)
+	ON UPDATE CASCADE ON DELETE RESTRICT;
 
-alter table membeli add constraint pk_membeli1 primary key (waktu_beli);
-alter table membeli add constraint pk_membeli2 primary key (id_menu);
-alter table membeli add constraint pk_membeli3 primary key (id_pembeli);
-
-
+ALTER TABLE membeli ADD CONSTRAINT pk_membeli1 PRIMARY KEY(waktu_beli);
+ALTER TABLE membeli ADD CONSTRAINT pk_membeli2 PRIMARY KEY(id_menu);
+ALTER TABLE membeli ADD CONSTRAINT pk_membeli3 PRIMARY KEY(id_pembeli);
